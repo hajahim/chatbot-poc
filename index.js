@@ -99,6 +99,60 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+app.get('/setup', function (req, res) {
+  setupGetStartedButton(res);
+  setupGreetingText(res);
+});
+
+function setupGreetingText (res) {
+  var messageData = {
+    "greeting": [{
+      "locale": "default",
+      "text": "Greeting text for default local !"
+    }, {
+      "locale":"en_US",
+      "text":"Greeting text for en_US local !"
+    }
+  ]};
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    form: messageData
+  },
+  function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      // Print out the response body
+      res.send(body);
+    } else {
+      res.send(body);
+    }
+  });
+}
+  
+function setupGetStartedButton (res) {
+  var messageData = {
+    "get_started": {
+      "payload": "getstarted"
+    }
+  };
+  // Start the request
+  request({
+      url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token="+ PAGE_ACCESS_TOKEN,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      form: messageData
+  },
+  function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      // Print out the response body
+      res.send(body);
+    } else {
+      res.send(body);
+    }
+  });
+}
+
 function handleMessage(sender_psid, received_message) {
   let response;
   

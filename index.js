@@ -108,7 +108,7 @@ function setupGreetingText (res) {
   var messageData = {
     "greeting": [{
       "locale": "default",
-      "text": "Greeting text for default local !"
+      "text": "Welcome to Val d'Europe! Click on the 'Let's Chat!' button below to find the answers to all of your questions"
     }, {
       "locale":"en_US",
       "text":"Greeting text for en_US local !"
@@ -133,7 +133,7 @@ function setupGreetingText (res) {
 function setupGetStartedButton (res) {
   var messageData = {
     "get_started": {
-      "payload": "getstarted"
+      "payload": "Let's Chat!"
     }
   };
   // Start the request
